@@ -19,7 +19,7 @@
          put_object/3, put_object/4, put_object/5, put_object/6,
          set_object_acl/3, set_object_acl/4,
          make_link/3, make_link/4,
-         make_post_link/3,
+         make_put_link/3,
          make_get_url/3, make_get_url/4]).
 
 -include_lib("erlcloud/include/erlcloud.hrl").
