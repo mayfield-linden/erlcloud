@@ -595,10 +595,10 @@ sign_put(Expire_time, BucketName, Key, Config)
     Sig = base64:encode(crypto:sha_mac(Config#aws_config.secret_access_key, To_sign)),
     {Sig, Expires}.
 
-make_put(Expire_time, BucketName, Key) ->
-    make_put(Expire_time, BucketName, Key, default_config()).
-make_put(Expire_time, BucketName, Key, Config) ->
-    {Sig, Expires} = sign_post(Expire_time, BucketName, Key, Config),
+make_put_link(Expire_time, BucketName, Key) ->
+    make_put_link(Expire_time, BucketName, Key, default_config()).
+make_put_link(Expire_time, BucketName, Key, Config) ->
+    {Sig, Expires} = sign_put(Expire_time, BucketName, Key, Config),
     Host = lists:flatten(["http://", BucketName, ".", Config#aws_config.s3_host, port_spec(Config)]),
     URI = lists:flatten(["/", Key, "?AWSAccessKeyId=", erlcloud_http:url_encode(Config#aws_config.access_key_id), "&Signature=", erlcloud_http:url_encode(Sig), "&Expires=", Expires]),
     {list_to_integer(Expires),
